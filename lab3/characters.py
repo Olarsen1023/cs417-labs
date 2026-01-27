@@ -1,0 +1,140 @@
+class Weapon:
+
+    def __init__(self, name, damage):
+
+        self.name = name
+
+        self.damage = damage
+
+    def attack_description(self):
+
+        return f"attacks with {self.name} for {self.damage} damage"
+
+class Character:
+
+    def __init__(self, name, special_power):
+
+        self.name = name
+
+        self.special_power = special_power
+
+        self.weapon = None
+
+    def __str__(self):
+
+        return f"I am {self.name}, a {self.__class__.__name__}"
+
+    def equip_weapon(self, weapon):
+
+        self.weapon = weapon
+
+    def attack(self):
+
+        if self.weapon:
+
+            return f"{self.name} {self.weapon.attack_description()}!"
+
+        return f"{self.name} attacks with bare hands for 5 damage!"
+
+    def get_status(self):
+
+        weapon_info = self.weapon.name if self.weapon else "unarmed"
+
+        return f"{self.name} the {self.__class__.__name__} - Weapon: {weapon_info}"
+
+    def summon_power(self):
+
+        raise NotImplementedError("Subclasses must implement summon_power()")
+
+class Warrior(Character):
+
+    def __init__(self, name):
+
+        super().__init__(name, "Berserker Rage")
+
+    def summon_power(self):
+
+        return f"{self.name} unleashes {self.special_power}! Attack power doubled!"
+
+class Mage(Character):
+
+    def __init__(self, name):
+
+        super().__init__(name, "Arcane Blast")
+
+    def summon_power(self):
+
+        return f"{self.name} channels {self.special_power}! Enemies are stunned!"
+    
+class Ranger(Character):
+    def __init__(self, name):
+        
+        super().__init__(name, "Arieal Barrage")
+
+    def summon_power(self):
+
+        return f"{self.name} unleashes {self.special_power}! Enemies are disoriented"
+    
+    def attack_description(self):
+        return f"attacks with {self.name} for {self.damage} damage"
+
+    
+class Longbow(Weapon):
+        def __init__(self, name= "Longbow", damage= "10"):
+            super().__init__(name, damage)
+
+class Axe(Weapon):
+    def __init__(self, name= "Battle Axe", damage= "20"):
+        super().__init__(name, damage)
+    
+
+
+class Staff(Weapon):
+        def __init__(self, name= "Magic Staff", damage= "15"):
+            super().__init__(name, damage)
+
+army = [ Warrior("Thorin"), Mage("Gandalf"), Ranger("Robin")]
+
+print("--My Army--")
+print()
+print()
+for character in army:
+    
+    if character.name == "Thorin":
+        character.equip_weapon(Axe())
+        print(character.__str__())
+        print(character.get_status())
+        print(character.summon_power())
+        print()
+    
+    elif character.name == "Gandalf":
+        character.equip_weapon(Staff())
+        print(character.__str__())
+        print(character.get_status())
+        print(character.summon_power())
+        print()
+    
+    elif character.name == "Robin":
+        character.equip_weapon(Longbow())
+        print(character.__str__())
+        print(character.get_status())
+        print(character.summon_power())
+        print()
+
+
+    print("-- Weapon Swap Demp --")
+
+
+    robin = Ranger("Robin")
+
+    # Equip first weapon
+    robin.equip_weapon(Axe())
+    print(robin.attack())  
+
+    # Swap to a different weapon
+    robin.equip_weapon(Staff())
+    print(robin.attack())
+
+
+
+    
