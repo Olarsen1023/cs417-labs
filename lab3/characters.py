@@ -135,6 +135,8 @@ for character in army:
     robin.equip_weapon(Staff())
     print(robin.attack())
 
-
+# Inheratance Could get clunky and messy when we are trying to equip different characters with certian weapons. I would say
+# that is the main reason as to why we are going to use comp rather than inheratnce for this problem at least. the reason we use comp
+# for the equipment is because comp gives use more variablity.
 
     
