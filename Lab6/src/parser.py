@@ -7,8 +7,8 @@ def parse_product_basic(response = dict()):
     return basic
 
 def parse_availability(response = dict()):
-    if response["in_stock"] == True:
-        return True
-    elif "in_stock" not in  response:
+    if "in_stock" not in  response:
         return False
+    elif response["in_stock"] == True:
+        return True
     return False
